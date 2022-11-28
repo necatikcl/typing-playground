@@ -7,6 +7,7 @@
       :placeholder="inputPlaceholder"
       @blur="appStore.stopTimer"
       ref="inputElement"
+      :disabled="appStore.remainingWords === 0"
     />
     <tp-footer />
   </div>
@@ -33,6 +34,7 @@ useShortcut(Shortcuts.Restart, appStore.restart);
 useShortcut(Shortcuts.Edit, () => router.push('/setup'));
 
 const inputPlaceholder = computed(() => {
+  if (appStore.remainingWords === 0) return 'Congrats! You have finished writing all the text.';
   if (appStore.writtenWords.length > 0) return null;
 
   return 'You can start to type via this box. Timer will start as soon as you press a key.';
