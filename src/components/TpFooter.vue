@@ -12,7 +12,7 @@
         <tp-shortcut :shortcut="Shortcuts.Restart" />
         <span>Restart</span>
       </tp-button>
-      <tp-button @click="appStore.editText">
+      <tp-button @click="$router.push('/setup')">
         <tp-shortcut :shortcut="Shortcuts.Edit" />
         <span>Edit</span>
       </tp-button>

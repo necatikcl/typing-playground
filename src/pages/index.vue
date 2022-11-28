@@ -17,6 +17,7 @@ import useAppStore from '../stores/appStore';
 import useShortcut, { Shortcuts } from '../composables/useShortcut';
 
 const appStore = useAppStore();
+const router = useRouter();
 
 const inputElement = ref<{ element: HTMLInputElement }>();
 
@@ -29,7 +30,7 @@ useShortcut(Shortcuts.BlurInput, () => {
 });
 
 useShortcut(Shortcuts.Restart, appStore.restart);
-useShortcut(Shortcuts.Edit, appStore.editText);
+useShortcut(Shortcuts.Edit, () => router.push('/setup'));
 
 const inputPlaceholder = computed(() => {
   if (appStore.writtenWords.length > 0) return null;
@@ -37,25 +38,12 @@ const inputPlaceholder = computed(() => {
   return 'You can start to type via this box. Timer will start as soon as you press a key.';
 });
 
-const submitWord = () => {
-  appStore.currentWord = appStore.currentWord.trim();
-
-  if (appStore.currentWord.length === 0) {
-    return;
-  }
-
-  appStore.writtenWords.push(appStore.currentWord);
-
-  appStore.currentWord = '';
-  appStore.activeIndex += 1;
-};
-
 const handleInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
 
   if (target.value.includes(' ')) {
     e.preventDefault();
-    submitWord();
+    appStore.pushCurrentWord();
     return;
   }
 

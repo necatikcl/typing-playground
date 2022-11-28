@@ -45,7 +45,7 @@ const scrollToActiveWord = (behavior: ScrollBehavior = 'smooth') => {
   wrapperNoScrollBottom.value = scrollTop + clientHeight === scrollHeight;
 };
 
-watch(() => [appStore.activeIndex], () => scrollToActiveWord());
+watch(() => appStore.activeIndex, () => setTimeout(scrollToActiveWord, 1), { flush: 'post' });
 watch(wordElements, () => scrollToActiveWord('auto'), { flush: 'post' });
 </script>
 

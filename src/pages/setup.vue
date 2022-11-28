@@ -26,7 +26,9 @@ const text = ref(appStore.text);
 const handleNext = () => {
   if (!text.value) return;
 
-  appStore.text = text.value;
+  if (appStore.text !== text.value) {
+    appStore.text = text.value;
+  }
 
   router.push('/');
 };
