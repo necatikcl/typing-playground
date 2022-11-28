@@ -36,7 +36,7 @@ const useAppStore = defineStore('appStore', () => {
     activeIndex: activeIndex.value,
   }));
 
-  const keystrokes = computed(() => words.value.slice(0, activeIndex.value).join('').length + currentWord.value.length);
+  const keystrokes = computed(() => writtenWordsIncludingCurrent.value.join('').length);
 
   const errorPercentage = computed(() => (keystrokes.value === 0
     ? 0 : (errors.value / keystrokes.value)));

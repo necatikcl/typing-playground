@@ -92,7 +92,7 @@ watch(wordElements, () => scrollToActiveWord('auto'), { flush: 'post' });
     flex-wrap: wrap;
     gap: 10px;
     padding: 20px;
-    height: 100%;
+    max-height: 100%;
     overflow-y: hidden
   }
 }
