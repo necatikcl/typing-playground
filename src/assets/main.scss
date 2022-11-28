@@ -17,8 +17,11 @@ body {
   max-width: 960px;
 
   > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     min-height: 100vh;
-    padding: 140px 1rem;
+    padding: 1rem;
   }
 }
 
