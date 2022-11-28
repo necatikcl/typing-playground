@@ -28,7 +28,7 @@ import formatPercentage from '../utils/formatPercentage';
 const appStore = useAppStore();
 
 const errorsAndPercentage = computed(() => `${appStore.errors} (${formatPercentage(appStore.errorPercentage)})`);
-const wordsWrittenAndKeystrokes = computed(() => `${appStore.writtenWordsIncludingCurrent.length} (${appStore.writtenWordsIncludingCurrent.join(' ').length})`);
+const wordsWrittenAndKeystrokes = computed(() => `${appStore.writtenWordsIncludingCurrent.length} (${appStore.keystrokes})`);
 
 const timePassed = computed(() => {
   let seconds = Math.floor(appStore.msPassed / 1000);

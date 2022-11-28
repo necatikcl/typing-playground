@@ -2,19 +2,30 @@ import { ref } from 'vue';
 import type { Ref } from 'vue';
 import { debouncedWatch } from '@vueuse/core';
 
+const storage = {
+  set<T>(key: string, newValue: T) {
+    localStorage.setItem(key, JSON.stringify(newValue));
+  },
+  get<T>(key: string) {
+    const fromStorage = localStorage.getItem(key);
+
+    if (fromStorage) {
+      return JSON.parse(fromStorage) as T;
+    }
+
+    return undefined;
+  },
+};
+
 const useReactiveStorage = <T>(key: string, defaultValue: T) => {
-  let initialValue = defaultValue;
-  const fromStorage = localStorage.getItem(key);
-
-  if (fromStorage) {
-    initialValue = JSON.parse(fromStorage) as T;
-  }
-
+  const initialValue = storage.get<T>(key) || defaultValue;
   const value = ref(initialValue) as Ref<T>;
+
+  storage.set(key, initialValue);
 
   debouncedWatch(
     value,
-    (newValue) => localStorage.setItem(key, JSON.stringify(newValue)),
+    (newValue) => storage.set(key, newValue),
     { deep: true, debounce: 1000 },
   );
 

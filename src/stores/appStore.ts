@@ -36,11 +36,10 @@ const useAppStore = defineStore('appStore', () => {
     activeIndex: activeIndex.value,
   }));
 
-  const errorPercentage = computed(() => {
-    const keystrokes = words.value.slice(0, activeIndex.value).join('').length;
+  const keystrokes = computed(() => words.value.slice(0, activeIndex.value).join('').length + currentWord.value.length);
 
-    return keystrokes === 0 ? 0 : (errors.value / keystrokes);
-  });
+  const errorPercentage = computed(() => (keystrokes.value === 0
+    ? 0 : (errors.value / keystrokes.value)));
 
   const restart = () => {
     console.log('restart');
@@ -68,6 +67,7 @@ const useAppStore = defineStore('appStore', () => {
     msPassed,
     writtenWords,
     writtenWordsIncludingCurrent,
+    keystrokes,
     wpm,
     errors,
     errorPercentage,
