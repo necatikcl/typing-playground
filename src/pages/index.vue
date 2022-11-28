@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import useAppStore from '@/stores/appStore';
+import useAppStore from '../stores/appStore';
 import useShortcut, { Shortcuts } from '../composables/useShortcut';
 
 const appStore = useAppStore();

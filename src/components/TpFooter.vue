@@ -21,9 +21,9 @@
 </template>
 
 <script setup lang="ts">
-import useAppStore from '@/stores/appStore';
-import { Shortcuts } from '@/composables/useShortcut';
-import formatPercentage from '@/utils/formatPercentage';
+import useAppStore from '../stores/appStore';
+import { Shortcuts } from '../composables/useShortcut';
+import formatPercentage from '../utils/formatPercentage';
 
 const appStore = useAppStore();
 

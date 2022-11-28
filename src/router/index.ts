@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import useAppStore from '@/stores/appStore';
+import useAppStore from '../stores/appStore';
 import SetupPage from '../pages/setup.vue';
 import IndexPage from '../pages/index.vue';
 

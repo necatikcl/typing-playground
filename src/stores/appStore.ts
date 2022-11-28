@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import useReactiveStorage from '@/utils/useReactiveStorage';
+import useReactiveStorage from '../utils/useReactiveStorage';
 
 const TIMER_SENSIVITY = 50;
 
@@ -106,8 +106,7 @@ const useAppStore = defineStore('appStore', () => {
   const editText = () => {
     restart();
 
-    // editText router çalıştıramuyor
-    useRouter().push('/setup');
+    // Known issue: Router can not be used in store, so we can't use router.push here right now.
   };
 
   return {
