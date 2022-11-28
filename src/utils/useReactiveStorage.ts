@@ -11,7 +11,7 @@ const useReactiveStorage = <T>(key: string, defaultValue: T) => {
 
   const value = ref(initialValue) as Ref<T>;
 
-  watch(value, (newValue) => localStorage.setItem(key, JSON.stringify(newValue)));
+  watch(value, (newValue) => localStorage.setItem(key, JSON.stringify(newValue)), { deep: true });
 
   return value;
 };

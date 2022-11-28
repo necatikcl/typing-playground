@@ -4,7 +4,6 @@
     <tp-input
       :model-value="appStore.currentWord"
       @input="handleInput"
-      @keydown.space="handleSubmitWord"
       :placeholder="inputPlaceholder"
       @blur="appStore.stopTimer"
       ref="inputElement"
@@ -38,16 +37,7 @@ const inputPlaceholder = computed(() => {
   return 'You can start to type via this box. Timer will start as soon as you press a key.';
 });
 
-const handleInput = (e: Event) => {
-  appStore.startTimer();
-
-  const target = e.target as HTMLInputElement;
-
-  target.value = target.value.trim();
-  appStore.currentWord = target.value;
-};
-
-const handleSubmitWord = () => {
+const submitWord = () => {
   appStore.currentWord = appStore.currentWord.trim();
 
   if (appStore.currentWord.length === 0) {
@@ -59,6 +49,22 @@ const handleSubmitWord = () => {
   appStore.currentWord = '';
   appStore.activeIndex += 1;
 };
+
+const handleInput = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+
+  if (target.value.includes(' ')) {
+    e.preventDefault();
+    submitWord();
+    return;
+  }
+
+  appStore.startTimer();
+
+  target.value = target.value.trim();
+  appStore.currentWord = target.value;
+};
+
 </script>
 
 <style lang="scss" scoped>

@@ -7,7 +7,7 @@ const exampleText = 'Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mı
 
 const useAppStore = defineStore('appStore', () => {
   const text = useReactiveStorage('tp:text', exampleText.repeat(4));
-  const msPassed = useReactiveStorage('tp:msPassed', 0);
+  const msPassed = useReactiveStorage('tp:ms-passed', 0);
   const activeIndex = useReactiveStorage('tp:active-index', 0);
   const writtenWords = useReactiveStorage<string[]>('tp:written-words', []);
   const currentWord = ref('');
@@ -65,7 +65,7 @@ const useAppStore = defineStore('appStore', () => {
     return errorCount;
   });
   const errorPercentage = computed(() => {
-    const totalLetters = writtenWordsIncludingCurrent.value.join('').length;
+    const totalLetters = words.value.slice(0, activeIndex.value).join('').length;
 
     if (totalLetters === 0) return 0;
 
@@ -108,6 +108,8 @@ const useAppStore = defineStore('appStore', () => {
 
     // Known issue: Router can not be used in store, so we can't use router.push here right now.
   };
+
+  watch(text, restart);
 
   return {
     text,
