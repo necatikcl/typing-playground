@@ -42,7 +42,6 @@ const useAppStore = defineStore('appStore', () => {
     ? 0 : (errors.value / keystrokes.value)));
 
   const restart = () => {
-    console.log('restart');
     resetTimer();
 
     writtenWords.value = [];
