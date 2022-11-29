@@ -7,9 +7,11 @@ interface Props {
 export default ({ words, writtenWords, activeIndex }: Props) => {
   let errorCount = 0;
 
+  // [todo] sadece aktif kelimeye kadar olan kelimeleri loopla
   words.forEach((word, index) => {
     const writtenWord = writtenWords[index];
 
+    // [todo] boşluğa tıklanmamalı bir input yoksa
     if (activeIndex > index && !writtenWord) {
       errorCount += word.length;
       return;
@@ -28,7 +30,7 @@ export default ({ words, writtenWords, activeIndex }: Props) => {
         return;
       }
 
-      if (writtenLetter && letter !== writtenLetter) {
+      if (letter !== writtenLetter) {
         errorCount += 1;
       }
     });

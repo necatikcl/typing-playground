@@ -1,6 +1,5 @@
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import type { Ref } from 'vue';
-import { debouncedWatch } from '@vueuse/core';
 
 const storage = {
   set<T>(key: string, newValue: T) {
@@ -23,10 +22,10 @@ const useReactiveStorage = <T>(key: string, defaultValue: T) => {
 
   storage.set(key, initialValue);
 
-  debouncedWatch(
+  watch(
     value,
     (newValue) => storage.set(key, newValue),
-    { deep: true, debounce: 1000 },
+    { deep: true },
   );
 
   return value;
