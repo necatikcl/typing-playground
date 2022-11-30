@@ -9,15 +9,22 @@
     ref="element"
   >
     <template v-if="writtenWord && !(totallyCorrect || totallyIncorrect)">
-      <span
+      <template
         v-for="(letter, letterIndex) in word"
         :key="letterIndex"
-        :class="{
-          'tp-reader-word-letter-incorrect': letter !== writtenWord[letterIndex],
-          'tp-reader-word-letter-correct': letter === writtenWord[letterIndex],
-        }">
-        {{ letter }}
-      </span>
+      >
+        <span v-if="active && writtenWord.length <= letterIndex">
+          {{ letter }}
+        </span>
+        <span
+          v-else
+          :class="{
+            'tp-reader-word-letter-incorrect': letter !== writtenWord[letterIndex],
+            'tp-reader-word-letter-correct': letter === writtenWord[letterIndex],
+          }">
+          {{ letter }}
+        </span>
+      </template>
     </template>
     <template v-else>{{ word }}</template>
   </span>
@@ -42,8 +49,9 @@ const totallyIncorrect = computed(() => {
     .every((letter, index) => letter !== props.writtenWord?.[index]);
 
   if (props.writtenWord.length >= props.word.length) return allLettersAreIncorrect;
+  if (props.active) return false;
 
-  return !props.active || allLettersAreIncorrect;
+  return allLettersAreIncorrect;
 });
 
 const element = ref<HTMLDivElement>();
