@@ -1,5 +1,5 @@
 export enum Shortcuts {
-  BlurInput = 'esc',
+  BlurInput = 'escape',
   FocusInput = 'enter',
   Restart = 'cmd+r',
   Edit = 'cmd+e',
@@ -10,12 +10,7 @@ const isModifierPressed = (e: KeyboardEvent, modifier?: string) => {
   return true;
 };
 
-const isKeyPressed = (e: KeyboardEvent, key: string) => {
-  const eventKey = e.key.toLowerCase();
-
-  if (key === 'esc') return eventKey === 'escape';
-  return eventKey === key;
-};
+const isKeyPressed = (e: KeyboardEvent, key: string) => e.key.toLowerCase() === key;
 
 const useShortcut = (
   shortcut: `${Shortcuts}`,

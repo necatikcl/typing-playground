@@ -7,9 +7,11 @@ interface Props {
 export default ({ words, writtenWords, activeIndex }: Props) => {
   let errorCount = 0;
 
+  // [TODO] loop through only the words up to the active word
   words.forEach((word, index) => {
     const writtenWord = writtenWords[index];
 
+    // [TODO] there must not be case in which there is not a writtenWord
     if (activeIndex > index && !writtenWord) {
       errorCount += word.length;
       return;
@@ -28,7 +30,7 @@ export default ({ words, writtenWords, activeIndex }: Props) => {
         return;
       }
 
-      if (writtenLetter && letter !== writtenLetter) {
+      if (letter !== writtenLetter) {
         errorCount += 1;
       }
     });
