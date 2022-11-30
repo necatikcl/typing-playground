@@ -16,7 +16,7 @@ const useShortcut = (
   shortcut: `${Shortcuts}`,
   handler: () => void,
 ) => {
-  if (import.meta.env.DEV) return;
+  // if (import.meta.env.DEV) return;
 
   const keys = shortcut.split('+');
 
